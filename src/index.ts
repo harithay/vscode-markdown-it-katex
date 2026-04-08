@@ -26,7 +26,7 @@ function isValidInlineDelim(state: StateInline, pos: number): { can_open: boolea
     }
 
     if (nextChar !== '$' && (
-        nextChar == undefined || isWhitespace(nextChar) || !isWordCharacterOrNumber(nextChar))
+        nextChar == undefined || isWhitespace(nextChar) || !isNumber(nextChar))
     ) {
         canClose = true;
     }
@@ -40,6 +40,10 @@ function isWhitespace(char: string): boolean {
 
 function isWordCharacterOrNumber(char: string): boolean {
     return /^[\w\d]$/u.test(char);
+}
+
+function isNumber(char: string): boolean {
+    return /^[\d]$/u.test(char);
 }
 
 function isValidBlockDelim(state: StateInline, pos: number): { readonly can_open: boolean; readonly can_close: boolean; } {
